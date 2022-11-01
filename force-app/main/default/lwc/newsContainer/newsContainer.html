@@ -1,0 +1,183 @@
+<template>
+    <div class="slds-m-around_x-small">
+        <div>
+            <lightning-button variant="brand" label="Get News" onclick={openModel}>
+            </lightning-button>
+        </div>
+        <div if:true={isModelOpen}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open slds-modal_large">
+                <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg>
+                <span class="slds-assistive-text">Cancel and close</span>
+                </button>
+                <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">WelCome To News Portal</h1>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-tabset>
+                        <lightning-tab label="Home" onactive={closeSpinner}>
+                            <template if:true={showSpinner}>
+                                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                            </template> 
+                            <template if:false={showSpinner}>
+                                <template if:true={topNewsData}>
+                                    <div class="slds-grid slds-wrap margin">
+                                    <template for:each={topNewsData} for:item="news">
+                                        <div class="slds-size_1-of-3 slds-p-left_x-small" key={news.source}>
+                                            <span>
+                                            <lightning-card title={news.title}>
+                                                <!-- <h1 class="title">{news.title}</h1> -->
+                                                <p><img src={news.urlToImage} class="newsImg"></p>
+                                                <p class="description">{news.description}</p>
+                                                <p class="description"><a href={news.url}>More..</a></p>
+                                            </lightning-card> 
+                                            </span>
+                                      </div>
+                                    </template>
+                                    </div>
+                                </template>
+                            </template>
+                        </lightning-tab>
+                        
+                            <lightning-tab label="Business" onactive={showBusinessNews}> 
+                                <template if:true={showSpinner}>
+                                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                                </template> 
+                                <template if:false={showSpinner}>
+                                    <template if:true={businessNewsData}>
+                                        <div class="slds-grid slds-wrap margin">
+                                        <template for:each={businessNewsData} for:item="news">
+                                            <div class="slds-size_1-of-3 slds-p-left_x-small" key={news.source}>
+                                                <span>
+                                                <lightning-card title={news.title}>
+                                                    <!-- <h1 class="title">{news.title}</h1> -->
+                                                    <p><img src={news.urlToImage} class="newsImg"></p>
+                                                    <p class="description">{news.description}</p>
+                                                    <p class="description"><a href={news.url}>More..</a></p>
+                                                </lightning-card> 
+                                                </span>
+                                          </div>
+                                        </template>
+                                        </div>
+                                    </template>
+                                </template>
+                            
+                            </lightning-tab>
+                    
+                        
+                            <lightning-tab label="Sports" onactive={showSportsNews}>
+
+                                <template if:true={showSpinner}>
+                                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                                </template> 
+                                <template if:false={showSpinner}>
+                                    <template if:true={sportsNewsData}>
+                                        <div class="slds-grid slds-wrap margin">
+                                        <template for:each={sportsNewsData} for:item="news">
+                                            <div class="slds-size_1-of-3 slds-p-left_x-small" key={news.source}>
+                                                <span>
+                                                <lightning-card title={news.title}>
+                                                    <!-- <h1 class="title">{news.title}</h1> -->
+                                                    <p><img src={news.urlToImage} class="newsImg"></p>
+                                                    <p class="description">{news.description}</p>
+                                                    <p class="description"><a href={news.url}>More..</a></p>
+                                                </lightning-card> 
+                                                </span>
+                                          </div>
+                                        </template>
+                                        </div>
+                                    </template>
+                                </template>
+
+                            </lightning-tab>
+                            <lightning-tab label="Technology" onactive={showTechnologyNews}> 
+
+                                <template if:true={showSpinner}>
+                                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                                </template> 
+                                <template if:false={showSpinner}>
+                                    <template if:true={technologyNewsData}>
+                                        <div class="slds-grid slds-wrap margin">
+                                        <template for:each={technologyNewsData} for:item="news">
+                                            <div class="slds-size_1-of-3 slds-p-left_x-small" key={news.source}>
+                                                <span>
+                                                <lightning-card title={news.title}>
+                                                    <!-- <h1 class="title">{news.title}</h1> -->
+                                                    <p><img src={news.urlToImage} class="newsImg"></p>
+                                                    <p class="description">{news.description}</p>
+                                                    <p class="description"><a href={news.url}>More..</a></p>
+                                                </lightning-card> 
+                                                </span>
+                                          </div>
+                                        </template>
+                                        </div>
+                                    </template>
+                                </template>
+
+                            </lightning-tab>
+                  
+                            <lightning-tab label="Entertainment" onactive={showEntertainmentNews}> 
+
+                                <template if:true={showSpinner}>
+                                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                                </template> 
+                                <template if:false={showSpinner}>
+                                    <template if:true={entertainmentNewsData}>
+                                        <div class="slds-grid slds-wrap margin">
+                                        <template for:each={entertainmentNewsData} for:item="news">
+                                            <div class="slds-size_1-of-3 slds-p-left_x-small" key={news.source}>
+                                                <span>
+                                                <lightning-card title={news.title}>
+                                                    <!-- <h1 class="title">{news.title}</h1> -->
+                                                    <p><img src={news.urlToImage} class="newsImg"></p>
+                                                    <p class="description">{news.description}</p>
+                                                    <p class="description"><a href={news.url}>More..</a></p>
+                                                </lightning-card> 
+                                                </span>
+                                          </div>
+                                        </template>
+                                        </div>
+                                    </template>
+                                </template>
+
+                            </lightning-tab>
+                            <lightning-tab label="Health" onactive={showHealthNews}> 
+                                <template if:true={showSpinner}>
+                                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                                </template> 
+                                <template if:false={showSpinner}>
+                                    <template if:true={topNewsData}>
+                                        <div class="slds-grid slds-wrap margin">
+                                        <template for:each={topNewsData} for:item="news">
+                                            <div class="slds-size_1-of-3 slds-p-left_x-small" key={news.source}>
+                                                <span>
+                                                <lightning-card title={news.title}>
+                                                    <!-- <h1 class="title">{news.title}</h1> -->
+                                                    <p><img src={news.urlToImage} class="newsImg"></p>
+                                                    <p class="description">{news.description}</p>
+                                                    <p class="description"><a href={news.url}>More..</a></p>
+                                                </lightning-card> 
+                                                </span>
+                                          </div>
+                                        </template>
+                                        </div>
+                                    </template>
+                                </template>
+                            </lightning-tab>
+                    </lightning-tabset>
+                </div>
+                <div class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={closeModel} aria-label="Cancel and close">Close</button>
+                
+                </div>
+                </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </div>
+    </div>
+   
+    
+</template>
