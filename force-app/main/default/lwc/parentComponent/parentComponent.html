@@ -1,0 +1,50 @@
+<template>
+    <!-- <lightning-button variant="brand" label="New Product" title="Primary action" onclick={openModel} class="slds-m-left_x-small"></lightning-button> -->
+
+    <template if:true={isModelOpen}>
+    <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container" style="width:80%;" >
+        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closeModel}>
+        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+        </svg>
+        <span class="slds-assistive-text">Cancel and close</span>
+        </button>
+        <div class="slds-modal__header">    
+        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">Add Product</h1>
+        </div>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            
+                <div if:true={recordId}>
+                <c-product-data-table recid={recordId}></c-product-data-table>
+                </div>
+            
+                <div>
+                    <lightning-combobox
+                name="progress"
+                label="Select Price Book"
+                value=''
+                placeholder="Select Progress"
+                options={pboptions}
+                onchange={handleChange} ></lightning-combobox>
+                </div>
+                <div>
+                    <lightning-input type="search" onchange={handleKeyChange} class="slds-m-bottom_small" label="Search"
+                    value={searchKey}>
+                </lightning-input>                
+            </div>
+            
+                <div if:true={recordId}>
+                    <c-price-book-product recid={recordId}></c-price-book-product>
+                </div>
+         
+        </div>
+        <div class="slds-modal__footer">
+            <button class="slds-button slds-button_neutral" onclick={closeModel}>Close</button>
+            <button class="slds-button slds-button_brand" onclick={saveChanges}>Save</button>
+          </div>
+        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+</template>

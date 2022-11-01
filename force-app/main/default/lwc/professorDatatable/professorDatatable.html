@@ -1,0 +1,84 @@
+<template>
+
+   <div class="slds-m-around_medium">
+      <lightning-input class = "round-input slds-m-bottom_small" placeholder="Search By Name" type="search" onchange={handleKeyChange} label="Search"
+         value={searchKey}>
+      </lightning-input>
+      <!-- Datatable -->
+
+      <lightning-datatable title="List" data-id="table" key-field="Id" data={data} columns={columns}
+         sorted-by={sortedBy} sorted-direction={sortedDirection} onrowselection={onRowSelection}
+         selected-rows={allSelectedRows} onsort={sortColumns} onrowaction={handleRowAction}>
+      </lightning-datatable>
+      <!-- <lightning-datatable title="List" data-id="table" key-field="Id" data={data} columns={columns}
+         sorted-by={sortedBy} sorted-direction={sortedDirection} onrowselection={onRowSelection}
+         selected-rows={allSelectedRows} onsort={sortColumns}  >
+      </lightning-datatable> -->
+
+
+      <!-- modal -->
+      
+      <template if:true={isModalOpen}>
+         <!-- Modal/Popup Box LWC starts here -->
+         
+         <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+               <!-- Modal/Popup Box LWC header here -->
+               <header class="slds-modal__header">
+                  <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                     onclick={closeModal}>
+                     <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                     </lightning-icon>
+                     <span class="slds-assistive-text">Close</span>
+                  </button>
+                  <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Students</h2>
+               </header>
+               <!-- Modal/Popup Box LWC body starts here -->
+               <template if:true={isStudentData}>
+                  
+                  <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                     <div class="exampleHolder">
+                        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                    </div>
+                     <lightning-datatable data-id="table1" key-field="Id" data={StudentDetail} columns={column3}
+                        sorted-by={sortedBy} >
+                     </lightning-datatable>
+                  </div>
+               </template>
+               <template if:false={isStudentData}>
+                  <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                     <div class="exampleHolder">
+                        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                    </div>
+                     <div class="Error">No Students under this professor</div>
+                  </div>
+               </template>
+               
+               <!-- Modal/Popup Box LWC footer starts here -->
+               <footer class="slds-modal__footer">
+                  <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+               </footer>
+            </div>
+         </section>
+         <div class="slds-backdrop slds-backdrop_open"></div>
+      </template>
+
+      <!-- pagination -->
+      <lightning-layout horizontal-align="space">
+         <lightning-layout-item flexibility="auto">
+            <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}>
+            </lightning-button>
+         </lightning-layout-item>
+         <lightning-layout-item flexibility="auto">
+            Page {page} of {totalPage}
+         </lightning-layout-item>
+         <lightning-layout-item flexibility="auto">
+            <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right" onclick={nextHandler}>
+            </lightning-button>
+         </lightning-layout-item>
+      </lightning-layout>
+   </div>
+   
+
+</template>

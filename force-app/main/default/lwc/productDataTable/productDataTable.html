@@ -1,0 +1,17 @@
+<template>
+    <div style="height:auto;min-height:100px;">
+        <p>{totalItem} Item(s) Seleted</p>
+        <lightning-datatable
+                key-field="Id"
+                data={data}
+                columns={columns}
+                hide-checkbox-column="true"
+                onrowaction={handleRowAction}
+                draft-values={draftValues}
+                suppress-bottom-bar="false"
+                
+                >
+                
+        </lightning-datatable>
+    </div>
+</template>

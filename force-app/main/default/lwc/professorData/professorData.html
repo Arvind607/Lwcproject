@@ -1,0 +1,46 @@
+<!-- <template>
+    <span class="heading">OUR TEACHERS</span>
+    <div class="slds-grid slds-wrap">
+        <template for:each={professorData} for:item="professor">
+              <div class="slds-size_1-of-3 slds-p-horizontal_x-small slds-p-vertical_x-small" key={professor.Id}>
+                <div class="card">
+                    <img src={techImage}  alt="Professor" class="img">
+                    <div class="container">
+                      <h3 style="text-align:center;font-size:1.5rem;"><b>{professor.Name}</b></h3>
+                      <p class="align"><b>Experience :</b> {professor.Experience__c} years</p>
+                      <p class="align"><b>Experties :</b> {professor.Experties__c} </p>
+                      <br>
+                    </div>
+                  </div>
+              </div>
+        </template>
+        
+   </div>
+
+</template> -->
+<template>
+   
+  <div class="slds-m-around_medium">
+        
+                            
+            <div class="container">                    
+                        
+       <lightning-carousel> 
+                                                               
+          <template for:each={professorData}  for:item="rows">
+                     
+             
+                  <lightning-carousel-image  width="300px" height="200px"  key={imageURL} src = {techImage}
+                  header={rows.Name}
+                  description={rows.Experience__c}>lpplplpl
+                 </lightning-carousel-image>
+                 
+            
+               
+           </template>
+         
+        </lightning-carousel>
+    </div>
+   </div>
+<!--   </lightning-card> -->
+</template>
